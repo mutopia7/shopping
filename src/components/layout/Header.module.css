@@ -1,0 +1,96 @@
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--header-bg);
+  color: var(--header-text-color);
+  border-bottom: 1px solid var(--header-border-color);
+  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+}
+
+.headerLogo {
+  font-size: var(--font-lg);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.headerLinks {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+/* لینک‌ها + انیمیشن خط */
+.headerLinks a {
+  position: relative;
+  text-decoration: none;
+  color: var(--header-text-color);
+  font-size: var(--font-md);
+  font-weight: 500;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.headerLinks a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0px;
+  height: 2px;
+  background-color: var(--header-link-hover);
+  transition: width 0.3s ease;
+}
+
+.headerLinks a:hover {
+  color: var(--header-link-hover);
+}
+
+.headerLinks a:hover::after {
+  width: 100%;
+}
+
+/* سرچ‌باکس */
+.headerNav form {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 0 var(--space-xs);
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.headerNav form:focus-within {
+  border-color: var(--header-link-hover);
+}
+
+.headerNav input[type="search"] {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-sm);
+  width: 280px;
+}
+
+/* Cart icon */
+.cartLink {
+  text-decoration: none;
+  color: var(--header-text-color);
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.cartLink:hover {
+  color: var(--header-link-hover);
+}

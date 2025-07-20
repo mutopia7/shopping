@@ -1,0 +1,15 @@
+:root {
+  --header-bg: #fff;
+  --header-text-color: #1a1a1a;
+  --header-link-hover: #000;
+  --header-border-color: #eaeaea;
+
+  --font-sm: 0.9rem;
+  --font-md: 1rem;
+  --font-lg: 1.4rem;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+}
