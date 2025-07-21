@@ -1,0 +1,212 @@
+/* HomePage.module.css */
+
+/* Root container */
+.homePage {
+  max-width: var(--max-width-wrapper);
+  margin-inline: auto;
+  padding: var(--space-lg) var(--space-md);
+  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+  color: var(--header-text-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  overflow: hidden;
+  background: linear-gradient(135deg, #feb47b 0%, #ff7e5f 100%);
+  color: white;
+  border-radius: var(--space-xs);
+  padding: var(--space-lg);
+  box-shadow: 0 6px 12px rgb(0 0 0 / 0.1);
+}
+
+.heroContent {
+  max-width: 28rem;
+  z-index: 1;
+}
+
+.heroContent h1 {
+  font-size: clamp(var(--font-lg), 5vw, 2.75rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+}
+
+.heroContent p {
+  font-size: var(--font-md);
+  line-height: 1.4;
+  margin-bottom: var(--space-lg);
+  color: var(--header-text-color);
+}
+
+.heroButton {
+  display: inline-block;
+  background-color: var(--cta-button-bg);
+  color: var(--cta-button-text);
+  padding: var(--space-xs) var(--space-lg);
+  border-radius: var(--space-xs);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+.heroButton:hover,
+.heroButton:focus-visible {
+  background-color: var(--cta-button-bg-hover);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.heroImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--space-xs);
+  overflow: hidden;
+}
+
+.heroImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Categories Section ===== */
+.categories {
+  text-align: center;
+}
+
+.categories h2 {
+  font-size: var(--font-lg);
+  margin-bottom: var(--space-md);
+  color: var(--header-text-color);
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-md);
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.categoryCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--header-bg);
+  border: 2px solid transparent;
+  padding: var(--space-md);
+  border-radius: var(--space-xs);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--header-text-color);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.categoryCard:hover,
+.categoryCard:focus-visible {
+  border-color: var(--cta-button-bg);
+  color: var(--cta-button-bg);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
+  outline: none;
+}
+
+/* ===== Featured Products Section ===== */
+.featured {
+  text-align: center;
+}
+
+.featured h2 {
+  font-size: var(--font-lg);
+  margin-bottom: var(--space-md);
+  color: var(--header-text-color);
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+/* ===== CTA Banner ===== */
+.ctaBanner {
+  background-color: var(--cta-bg);
+  color: var(--cta-button-text);
+  padding: var(--space-lg) var(--space-md);
+  border-radius: var(--space-xs);
+  text-align: center;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 0.12);
+}
+
+.ctaBanner h2 {
+  font-size: var(--font-lg);
+  margin-bottom: var(--space-md);
+}
+
+.ctaButton {
+  display: inline-block;
+  background-color: var(--cta-button-bg);
+  color: var(--cta-button-text);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--space-xs);
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+.ctaButton:hover,
+.ctaButton:focus-visible {
+  background-color: var(--cta-button-bg-hover);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .heroContent {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .heroImage {
+    aspect-ratio: 4 / 3;
+  }
+  
+  .categoryGrid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .featuredGrid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent h1 {
+    font-size: var(--font-md);
+  }
+  
+  .heroContent p {
+    font-size: var(--font-sm);
+  }
+
+  .ctaBanner h2 {
+    font-size: var(--font-md);
+  }
+}
