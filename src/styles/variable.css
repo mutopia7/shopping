@@ -19,6 +19,10 @@
   --cta-button-text: #fff;
   --cta-button-bg-hover: #222;
 
+  --card-price-color: #e63946;
+  --card-button-bg: var(--header-text-color);
+  --card-button-bg-hover: #457b9d;
+
   --font-xs: 0.85rem;
   --font-sm: 1rem;
   --font-md: 1.125rem;
@@ -33,4 +37,6 @@
   --space-2xl: 4rem;
 
   --max-width-wrapper: 1200px;
+
+
 }
