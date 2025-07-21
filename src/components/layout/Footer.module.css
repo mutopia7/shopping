@@ -1,0 +1,215 @@
+:root {
+  
+}
+
+/* Root footer wrapper */
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: var(--space-xl) var(--space-sm) var(--space-lg);
+  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+}
+
+/* Limit internal width */
+.footer > * {
+  max-width: var(--max-width-wrapper);
+  margin-inline: auto;
+}
+
+/* ===== CTA Section ===== */
+.footerCta {
+  width: 100%;
+  text-align: center;
+  background: var(--cta-bg);
+  border: 1px solid var(--cta-border);
+  border-radius: 8px;
+  padding: var(--space-lg) var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.footerCtaHeading {
+  font-size: var(--font-lg);
+  font-weight: 600;
+}
+
+.footerCtaSub {
+  font-size: var(--font-sm);
+  color: var(--footer-subtext);
+  margin-top: var(--space-xs);
+  max-width: 32ch;
+  margin-inline: auto;
+}
+
+.footerCtaForm {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.footerCtaForm input[type="email"] {
+  width: clamp(220px, 50%, 360px);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-sm);
+  border: 1px solid var(--cta-border);
+  border-radius: 4px;
+  background: var(--cta-input-bg);
+  color: var(--cta-input-text);
+  outline: none;
+}
+
+.footerCtaForm input[type="email"]:focus-visible {
+  border-color: var(--footer-link-hover);
+  box-shadow: 0 0 0 2px var(--footer-link-hover);
+}
+
+.footerCtaForm button {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  background: var(--cta-button-bg);
+  color: var(--cta-button-text);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.footerCtaForm button:hover,
+.footerCtaForm button:focus-visible {
+  background: var(--cta-button-bg-hover);
+}
+
+/* Screen reader utility */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(50%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* ===== Main Footer Content ===== */
+.footerMain {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  width: 100%;
+  text-align: center;
+}
+
+.footerBrand {
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+.footerLogo {
+  text-decoration: none;
+  color: var(--footer-text);
+  font-size: var(--font-lg);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.footerLogo:hover,
+.footerLogo:focus-visible {
+  color: var(--footer-link-hover);
+}
+
+.footerDesc {
+  margin-top: var(--space-xs);
+  font-size: var(--font-sm);
+  color: var(--footer-subtext);
+  line-height: 1.4;
+}
+
+/* Link columns wrapper */
+.footerNav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+  gap: var(--space-lg);
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+}
+
+.footerCol {
+  text-align: center;
+}
+
+.footerCol h3 {
+  font-size: var(--font-md);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+.footerCol ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerCol a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--footer-link);
+  font-size: var(--font-sm);
+  line-height: 1.6;
+  transition: color 0.2s ease;
+}
+
+.footerCol a:hover,
+.footerCol a:focus-visible {
+  color: var(--footer-link-hover);
+}
+
+/* ===== Bottom Strip ===== */
+.footerBottom {
+  text-align: center;
+  border-top: 1px solid var(--footer-border);
+  padding-top: var(--space-md);
+  font-size: var(--font-xs);
+  color: var(--footer-subtext);
+}
+
+/* ===== Larger screens ===== */
+@media (min-width: 640px) {
+  .footerMain {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    text-align: left;
+    align-items: start;
+  }
+
+  .footerBrand {
+    margin-inline: 0;
+    text-align: left;
+  }
+
+  .footerNav {
+    justify-items: start;
+    text-align: left;
+  }
+
+  .footerCol {
+    text-align: left;
+  }
+}
+
+/* Even wider screens */
+@media (min-width: 1024px) {
+  .footer {
+    padding-inline: var(--space-xl);
+  }
+
+  .footerCta {
+    padding-inline: var(--space-lg);
+  }
+}
