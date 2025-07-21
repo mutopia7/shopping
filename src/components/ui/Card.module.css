@@ -1,75 +1,85 @@
 .card {
-  background-color: var(--header-bg);
-  border-radius: 0.75rem; /* حدود 12px */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  max-width: 280px;
-  margin: var(--space-md);
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: var(--space-sm);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%; /* For cards to be the same height in the grid */
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.cardImageWrapper {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+
+  /* Colored border and white background inside */
+  border: 2px solid transparent;
+  background-image: linear-gradient(white, white), radial-gradient(circle at top left, #ff7e5f, #feb47b);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+
+  margin-bottom: var(--space-sm);
 }
 
 .cardImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--space-sm);
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-  border-bottom: 1px solid var(--header-border-color);
 }
 
 .cardTitle {
-  font-size: var(--font-lg);
-  font-weight: 600;
-  margin: var(--space-md);
-  color: var(--header-text-color);
-  flex-grow: 1;
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: #333;
+  margin: var(--space-xs) 0;
+  min-height: 50px; /* Fixed height for alignment */
 }
 
 .cardPrice {
   font-size: var(--font-md);
   font-weight: 700;
-  color: var(--card-price-color);
-  margin: 0 var(--space-md) var(--space-md) var(--space-md);
+  color: #ff7e5f;
+  margin-top: auto; /* The price is always low in the content section. */
+  margin-bottom: var(--space-sm);
+  width: 100%;
 }
 
 .cardButton {
-  background-color: var(--card-button-bg);
-  color: var(--header-bg);
-  border: none;
+  width: 100%;
   padding: var(--space-xs) var(--space-md);
-  margin: 0 var(--space-md) var(--space-lg) var(--space-md);
-  border-radius: 0.5rem;
-  font-size: var(--font-md);
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  background-color: var(--cta-button-bg);
+  color: var(--cta-button-text);
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.cardButton:hover,
-.cardButton:focus {
-  background-color: var(--card-button-bg-hover);
-  outline: none;
-}
-
-@media (max-width: 480px) {
-  .cardImage {
-    height: 150px;
-  }
-  .cardTitle {
-    font-size: var(--font-md);
-  }
-  .cardPrice {
-    font-size: var(--font-sm);
-  }
-  .cardButton {
-    padding: var(--space-2xs) var(--space-sm);
-    font-size: var(--font-sm);
-  }
+.cardButton:hover {
+  background-color: #ff7e5f;
 }
