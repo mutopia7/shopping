@@ -1,4 +1,3 @@
-
 .header {
   display: flex;
   align-items: center;
@@ -8,6 +7,7 @@
   color: var(--header-text-color);
   border-bottom: 1px solid var(--header-border-color);
   font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+  position: relative;
 }
 
 .headerLogo {
@@ -16,6 +16,16 @@
   letter-spacing: 1px;
 }
 
+/* دکمه همبرگر */
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--header-text-color);
+  cursor: pointer;
+}
+
+/* ناوبری */
 .headerNav {
   display: flex;
   align-items: center;
@@ -28,7 +38,6 @@
   list-style: none;
 }
 
-/* لینک‌ها + انیمیشن خط */
 .headerLinks a {
   position: relative;
   text-decoration: none;
@@ -44,7 +53,7 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 0px;
+  width: 0;
   height: 2px;
   background-color: var(--header-link-hover);
   transition: width 0.3s ease;
@@ -58,7 +67,7 @@
   width: 100%;
 }
 
-/* سرچ‌باکس */
+/* فرم جستجو */
 .headerNav form {
   display: flex;
   align-items: center;
@@ -82,7 +91,7 @@
   width: 280px;
 }
 
-/* Cart icon */
+/* آیکون سبد خرید */
 .cartLink {
   text-decoration: none;
   color: var(--header-text-color);
@@ -93,4 +102,48 @@
 
 .cartLink:hover {
   color: var(--header-link-hover);
+}
+
+/* ========== ریسپانسیو ========== */
+@media (max-width: 900px) {
+  .menuToggle {
+    display: block;
+  }
+
+  .headerNav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    background-color: var(--header-bg);
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--header-border-color);
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 100;
+  }
+
+  .headerNav.showMenu {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .headerLinks {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .headerNav form {
+    width: 100%;
+  }
+
+  .headerNav input[type="search"] {
+    width: 100%;
+  }
 }
