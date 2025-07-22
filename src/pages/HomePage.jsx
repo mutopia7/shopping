@@ -1,30 +1,14 @@
-import { Link } from "react-router-dom";
-import styles from "./HomePage.module.css";
-import Card from "../components/ui/Card"; 
+import { Link } from 'react-router-dom';
+import styles from './HomePage.module.css';
+import Card from '../components/ui/Card';
 import heroImage from '../assets/shopping.jpg';
+import { useProducts } from '../context/ProductContext';
 
 function HomePage() {
-  // نمونه محصولات تستی
-  const featuredProducts = [
-    {
-      id: 1,
-      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-      title: "Leather Backpack",
-      price: 89.99,
-    },
-    {
-      id: 2,
-      image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-      title: "Men's Cotton Jacket",
-      price: 49.99,
-    },
-    {
-      id: 3,
-      image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
-      title: "Gaming Monitor",
-      price: 299.99,
-    },
-  ];
+  const { products, loading, error } = useProducts();
+
+  // انتخاب 3 محصول برجسته
+  const featuredProducts = products.slice(0, 3);
 
   return (
     <main className={styles.homePage}>
@@ -36,11 +20,32 @@ function HomePage() {
           <Link to="/shop" className={styles.heroButton}>Shop Now</Link>
         </div>
         <div className={styles.heroImage}>
-          <img src={heroImage} alt="Fashion Banner" className={styles.heroImage} />
+          <img src={heroImage} alt="Fashion Banner" />
         </div>
       </section>
 
-      {/* Featured Categories */}
+      {/* Featured Products (از Context) */}
+      <section className={styles.featured}>
+        <h2>Featured Products</h2>
+
+        {loading && <p>Loading...</p>}
+        {error && !loading && <p className={styles.errorMsg}>{error}</p>}
+        {!loading && !error && (
+          <div className={styles.featuredGrid}>
+            {featuredProducts.map((p) => (
+              <Card
+                key={p.id}
+                id={p.id}
+                image={p.image}
+                title={p.title}
+                price={p.price}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* Shop by Category */}
       <section className={styles.categories}>
         <h2>Shop by Category</h2>
         <div className={styles.categoryGrid}>
@@ -48,21 +53,6 @@ function HomePage() {
           <Link to="/shop?cats=women" className={styles.categoryCard}>Women</Link>
           <Link to="/shop?cats=accessories" className={styles.categoryCard}>Accessories</Link>
           <Link to="/shop?cats=electronics" className={styles.categoryCard}>Electronics</Link>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className={styles.featured}>
-        <h2>Featured Products</h2>
-        <div className={styles.featuredGrid}>
-          {featuredProducts.map((product) => (
-            <Card
-              key={product.id}
-              image={product.image}
-              title={product.title}
-              price={product.price}
-            />
-          ))}
         </div>
       </section>
 

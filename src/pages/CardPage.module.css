@@ -1,0 +1,153 @@
+.cardPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.breadcrumb {
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.currentCrumb{
+  font-weight: 700;
+}
+
+.contentCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.cardPageImageWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 2px solid var(--orange);
+  border-radius: 8px;
+  padding: var(--space-sm);
+  height: 100%;
+}
+
+.cardPageImageWrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.cardPageDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cardPagePrice {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff7e5f;
+}
+
+.cardPageCat {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.optionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 1rem;
+}
+
+.colorOptions {
+  display: flex;
+  gap: 0.9rem;
+}
+
+.colorCircle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, border 0.2s ease;
+}
+
+.colorCircle.active {
+  border: 2px solid #333;
+}
+
+.sizeOptions {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.sizeBtn {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sizeBtn.active {
+  background: #333;
+  color: #fff;
+}
+
+.cartActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.quantityWrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.quantityWrapper button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.quantityWrapper span {
+  min-width: 40px;
+  text-align: center;
+}
+
+.addToCartBtn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #ff7e5f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addToCartBtn:hover {
+  background: #eb684e;
+}
+
+@media (max-width: 768px) {
+  .contentCols {
+    grid-template-columns: 1fr;
+  }
+}

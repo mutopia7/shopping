@@ -2,80 +2,34 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styles from './ShopPage.module.css';
 import Card from '../components/ui/Card';
-import { mapApiCategoryToDisplay, DISPLAY_LABELS } from '../utils/categoryMap';
+import { useProducts } from '../context/ProductContext';
+import { DISPLAY_LABELS } from '../utils/categoryMap';
 
 function ShopPage() {
+  const { products, loading, error, categories } = useProducts();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Products from API
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading]   = useState(true);
-  const [error, setError]       = useState(null);
-
-  // Controlled filters
+  // کنترل فیلترها
   const [selectedCats, setSelectedCats] = useState(new Set());
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
-  /* ---------------- Fetch products ---------------- */
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        setLoading(true);
-        const res = await fetch('https://fakestoreapi.com/products');
-        if (!res.ok) throw new Error('Failed to fetch products');
-        const data = await res.json();
-        if (cancelled) return;
-
-        // Convert data to card format
-        const normalized = data.map((p) => ({
-          id: p.id,
-          title: p.title,
-          price: p.price,
-          image: p.image,
-          // Actual API Category
-          apiCategory: p.category,
-          // Our display category
-          category: mapApiCategoryToDisplay(p.category),
-        }));
-
-        setProducts(normalized);
-        setError(null);
-      } catch (err) {
-        if (!cancelled) setError(err.message || 'Error loading products');
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  /* ---------------- Categories from products ---------------- */
-  const categories = useMemo(() => {
-    const set = new Set(products.map((p) => p.category));
-    return Array.from(set);
-  }, [products]);
-
   /* ---------------- Initialize filters from URL ---------------- */
   useEffect(() => {
-    // cats=men,women
     const catsParam = searchParams.get('cats');
     if (catsParam) {
       const incoming = catsParam.split(',').map((s) => s.trim()).filter(Boolean);
       setSelectedCats(new Set(incoming));
     } else {
-      setSelectedCats(new Set()); // empty = همه
+      setSelectedCats(new Set());
     }
 
     const min = searchParams.get('min');
     const max = searchParams.get('max');
     if (min !== null) setMinPrice(min);
     if (max !== null) setMaxPrice(max);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only the first time; we don't want the user to override it again when they change the filter.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /* ---------------- Update URL when filters change ---------------- */
   const syncUrl = useCallback((catsSet, min, max) => {
@@ -86,7 +40,6 @@ function ShopPage() {
     setSearchParams(params, { replace: true });
   }, [setSearchParams]);
 
-  // Update URL every time the filter changes.
   useEffect(() => {
     syncUrl(selectedCats, minPrice, maxPrice);
   }, [selectedCats, minPrice, maxPrice, syncUrl]);
@@ -104,9 +57,7 @@ function ShopPage() {
   /* ---------------- Filter products ---------------- */
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
-      // Category
       if (selectedCats.size > 0 && !selectedCats.has(p.category)) return false;
-      // Price
       const price = Number(p.price);
       const minOk = minPrice === '' ? true : price >= Number(minPrice);
       const maxOk = maxPrice === '' ? true : price <= Number(maxPrice);
@@ -120,7 +71,7 @@ function ShopPage() {
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
         <Link to="/">Home</Link>
-        <span aria-hidden="true">→</span>
+        <span aria-hidden="true"> → </span>
         <span className={styles.currentCrumb}>Shop</span>
       </nav>
 
@@ -188,6 +139,7 @@ function ShopPage() {
           {!loading && !error && filteredProducts.map((p) => (
             <Card
               key={p.id}
+              id={p.id}
               image={p.image}
               title={p.title}
               price={p.price}
