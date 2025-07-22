@@ -56,16 +56,6 @@ src/
 This project is developed by **Rasool Vahid**.  
 - GitHub: [mutopia7](https://github.com/mutopia7)
 
-## 🌟 Future Improvements
-
-- Add user authentication (login/signup).
-- Add checkout page with payment simulation.
-- Implement product reviews and ratings.
-- Integrate with a real e-commerce API.
-
-## 🖼 Screenshots
-
-_Add some screenshots of your app here to showcase UI and responsiveness._
 
 ---
 
