@@ -1,0 +1,87 @@
+.about {
+  padding: 4rem 1rem;
+  background: #fdfdfd;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.intro {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: center;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+.features h2,
+.creator h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.features ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.features li {
+  margin-bottom: 0.5rem;
+}
+
+.creator {
+  margin-top: 2.5rem;
+  text-align: center;
+  color: #444;
+}
+
+.githubLink {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #ff7e5f;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.githubLink:hover {
+  background: #eb684e;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .features h2,
+  .creator h2 {
+    font-size: 1.3rem;
+  }
+}
