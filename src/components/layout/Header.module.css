@@ -1,149 +1,274 @@
+/* =========================================
+   Header.module.css
+   Responsive header w/ logo (L), nav+search (R), cart badge, hamburger menu
+   Uses project CSS custom properties (vars) when available.
+   ========================================= */
+
+/* Base tokens fallbacks (only used if project vars missing) */
+:root {
+  --_hdr-bg: var(--header-bg, #fff);
+  --_hdr-text: var(--header-text-color, #1a1a1a);
+  --_hdr-border: var(--header-border-color, #eaeaea);
+  --_hdr-link-hover: var(--header-link-hover, #000);
+  --_accent: var(--cta-button-bg, #ff7e5f);
+  --_accent-hover: var(--cta-button-bg-hover, #eb684e);
+  --_radius-sm: 4px;
+  --_radius-md: 8px;
+  --_pad-x: var(--space-md, 1.5rem);
+  --_pad-y: var(--space-sm, 1rem);
+  --_font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---- Header shell ---- */
 .header {
+  background-color: var(--_hdr-bg);
+  border-bottom: 1px solid var(--_hdr-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.05);
+  font-family: var(--_font-body);
+}
+
+/* ---- Inner container ---- */
+.inner {
+  max-width: var(--max-width-wrapper, 1200px);
+  margin-inline: auto;
+  padding: 0.7rem var(--_pad-x);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-sm) var(--space-lg);
-  background-color: var(--header-bg);
-  color: var(--header-text-color);
-  border-bottom: 1px solid var(--header-border-color);
-  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+  gap: 1.25rem;
   position: relative;
 }
 
-.headerLogo {
-  font-size: var(--font-lg);
-  font-weight: bold;
-  letter-spacing: 1px;
+/* ---- Logo ---- */
+.logoWrapper {
+  flex-shrink: 0;
+  margin-left: 10px; /* push slightly right, per request */
+}
+.logo {
+  font-size: var(--font-lg, 1.5rem);
+  font-weight: 700;
+  color: var(--orange);
+  text-decoration: none;
+  user-select: none;
+  line-height: 1;
+}
+.logo:focus-visible {
+  outline: 2px solid var(--_accent);
+  outline-offset: 2px;
 }
 
-/* دکمه همبرگر */
-.menuToggle {
+/* ---- Mobile menu button (hamburger / close) ---- */
+.mobileMenuButton {
   display: none;
   background: none;
   border: none;
-  color: var(--header-text-color);
+  padding: 0;
+  margin-left: 10px;
   cursor: pointer;
+  color: var(--_hdr-text);
+  line-height: 0;
+}
+.mobileMenuButton:focus-visible {
+  outline: 2px solid var(--_accent);
+  outline-offset: 2px;
 }
 
-/* ناوبری */
-.headerNav {
+/* ---- Primary nav ---- */
+.nav {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: 2rem;
+  flex-grow: 1;
+  justify-content: flex-end; /* align right vs logo left */
+  transition: transform 0.3s ease;
 }
 
-.headerLinks {
-  display: flex;
-  gap: var(--space-md);
-  list-style: none;
+/* mobileOpen modifier (second class applied in JSX) */
+.nav.mobileOpen {
+  transform: translateY(0);
 }
 
-.headerLinks a {
-  position: relative;
+.navLink {
+  color: var(--_hdr-text);
   text-decoration: none;
-  color: var(--header-text-color);
-  font-size: var(--font-md);
-  font-weight: 500;
+  font-weight: 600;
+  font-size: var(--font-sm, 1rem);
+  position: relative;
   padding-bottom: 4px;
   transition: color 0.3s ease;
 }
 
-.headerLinks a::after {
+/* underline hover animation (LTR) */
+.navLink::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: 0;
+  inset-inline-start: 0;
+  inset-block-end: 0;
   width: 0;
   height: 2px;
-  background-color: var(--header-link-hover);
+  background-color: var(--_hdr-link-hover);
   transition: width 0.3s ease;
 }
-
-.headerLinks a:hover {
-  color: var(--header-link-hover);
+.navLink:hover,
+.navLink:focus {
+  color: var(--_hdr-link-hover);
+  outline: none;
 }
-
-.headerLinks a:hover::after {
+.navLink:hover::after,
+.navLink:focus::after {
   width: 100%;
 }
 
-/* فرم جستجو */
-.headerNav form {
-  display: flex;
-  align-items: center;
+/* ---- Search (desktop) ---- */
+.searchWrapper {
+  position: relative;
+  width: 220px;
+  max-width: 240px;
+}
+.searchInput {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  color: var(--_hdr-text);
+  background: var(--_hdr-bg);
   border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 0 var(--space-xs);
-  background-color: #f9f9f9;
+  border-radius: var(--_radius-sm);
   transition: border-color 0.3s ease;
 }
-
-.headerNav form:focus-within {
-  border-color: var(--header-link-hover);
+.searchInput::placeholder {
+  color: #999;
 }
-
-.headerNav input[type="search"] {
-  border: none;
-  background: transparent;
+.searchInput:focus {
   outline: none;
-  padding: var(--space-xs) var(--space-sm);
-  font-size: var(--font-sm);
-  width: 280px;
+  border-color: var(--_accent);
 }
 
-/* آیکون سبد خرید */
-.cartLink {
+/* dropdown results */
+.searchResults {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: calc(100% + 4px);
+  inset-inline-end: 0;
+  background: var(--_hdr-bg);
+  border: 1px solid #ccc;
+  border-radius: 0 0 var(--_radius-sm) var(--_radius-sm);
+  max-height: 180px;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+  z-index: 10;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.searchResultItem {
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--_hdr-text);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.searchResultItem:hover,
+.searchResultItem:focus {
+  background-color: var(--_accent);
+  color: #fff;
+  outline: none;
+}
+
+/* ---- Cart icon + badge ---- */
+.cartIcon {
+  position: relative;
+  color: var(--_hdr-text);
   text-decoration: none;
-  color: var(--header-text-color);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  transition: color 0.3s ease;
+  justify-content: center;
+  line-height: 0;
 }
 
-.cartLink:hover {
-  color: var(--header-link-hover);
+/* badge moved further right (per request) */
+.cartBadge {
+  position: absolute;
+  top: -10px;
+  right: -14px; /* shift further so icon fully visible */
+  background-color: #ff4d4f;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  place-content: center;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
 }
 
-/* ========== ریسپانسیو ========== */
-@media (max-width: 900px) {
-  .menuToggle {
-    display: block;
+/* =========================================
+   Responsive: mobile <= 768px
+   - nav becomes slide-down panel
+   - search moves inside nav stack
+   ========================================= */
+@media (max-width: 768px) {
+  .inner {
+    padding: 0.7rem var(--space-sm, 1rem);
   }
 
-  .headerNav {
-    position: absolute;
-    top: 100%;
+  .mobileMenuButton {
+    display: block;
+    order: 2; /* appears after logo in flex row */
+  }
+
+  /* hide nav off-screen by default (JS adds mobileOpen) */
+  .nav {
+    position: fixed;
+    top: 60px; /* adjust if header height changes */
     left: 0;
     right: 0;
+    background: var(--_hdr-bg);
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-sm);
-    background-color: var(--header-bg);
-    padding: var(--space-md);
-    border-bottom: 1px solid var(--header-border-color);
+    padding: var(--space-md, 1.5rem) var(--space-md, 1.5rem) var(--space-xl, 3rem);
+    gap: 1.25rem;
     transform: translateY(-120%);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 100;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    z-index: 999;
   }
 
-  .headerNav.showMenu {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
+  .navLink {
+    font-size: 1.125rem;
   }
 
-  .headerLinks {
-    flex-direction: column;
+  /* search full-width inside mobile panel */
+  .searchWrapper {
     width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+  .searchResults {
+    inset-inline-start: 0;
+    inset-inline-end: 0;
   }
 
-  .headerNav form {
-    width: 100%;
+  /* cart icon remains visible in header row */
+  .cartIcon {
+    margin-inline-start: auto;
   }
+}
 
-  .headerNav input[type="search"] {
-    width: 100%;
+/* very small screens */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.4rem;
+  }
+  .navLink {
+    font-size: 1rem;
+  }
+  .searchInput {
+    font-size: 0.95rem;
   }
 }

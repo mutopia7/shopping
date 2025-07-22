@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import styles from './Card.module.css';
 import { slugify } from '../../utils/slugify';
+import { useCart } from '../../context/CartContext';
 
 function Card({ id, image, title, price }) {
   const slug = slugify(title);
   const productLink = `/shop/${id}-${slug}`;
+  const { addToCart } = useCart(); // for add to cart
 
   return (
     <article className={styles.card}>
@@ -18,7 +20,7 @@ function Card({ id, image, title, price }) {
         </div>
       </Link>
       <button
-        onClick={() => {}}
+        onClick={() => addToCart({ id, image, title, price }, 1)}
         className={styles.cardButton}
         type="button"
       >

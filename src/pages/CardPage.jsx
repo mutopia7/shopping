@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from './CardPage.module.css';
 import { useProducts } from '../context/ProductContext';
 import { DISPLAY_LABELS } from '../utils/categoryMap';
+import { useCart } from '../context/CartContext';
 
 function parseProductKey(productKey) {
   const [idPart, ...slugParts] = productKey.split('-');
@@ -11,6 +12,8 @@ function parseProductKey(productKey) {
 }
 
 function CardPage() {
+  const { addToCart } = useCart();
+
   const { productKey } = useParams();
   const { id } = parseProductKey(productKey);
 
@@ -131,7 +134,7 @@ function CardPage() {
               <span>{quantity}</span>
               <button onClick={() => setQuantity((q) => q + 1)}>+</button>
             </div>
-            <button className={styles.addToCartBtn}>Add to Cart</button>
+            <button className={styles.addToCartBtn} onClick={() => addToCart(product, quantity)}>Add to Cart</button>
           </div>
         </div>
       </div>

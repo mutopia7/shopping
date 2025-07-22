@@ -3,6 +3,7 @@ import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import CardPage from './pages/CardPage'; 
+import CartPage from './pages/CartPage'
 
 function App() {
   return (
@@ -10,10 +11,12 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="shop" element={<ShopPage />} />
-        <Route path="shop/:productKey" element={<CardPage />} /> {/* صفحه محصول */}
+        <Route path="shop/:productKey" element={<CardPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Route>
     </Routes>
   );
 }
+
 
 export default App;
